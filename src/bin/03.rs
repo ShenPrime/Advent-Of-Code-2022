@@ -13,14 +13,6 @@ pub fn part_one(input: &str) -> Option<u32> {
         let val = **common.last().unwrap() as u32;
 
         sum += if val > 90 { val - 96 } else { val - 38 }
-        //
-        // for &val in first_bytes {
-        //     if second_bytes.contains(&val) && val > 90 {
-        //         sum += val as u32 - 96
-        //     } else if second_bytes.contains(&val) {
-        //         sum += val as u32 - 38
-        //     }
-        // }
     }
     Some(sum)
 }
