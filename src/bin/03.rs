@@ -8,33 +8,21 @@ pub fn part_one(input: &str) -> Option<u32> {
         let (first, second) = line.split_at(line.len() / 2);
         let first_bytes: HashSet<&u8> = HashSet::from_iter(first.as_bytes().iter());
         let second_bytes: HashSet<&u8> = HashSet::from_iter(second.as_bytes().iter());
-        // first_bytes.iter().fold(sum, |acc, e| {
-        //     if second_bytes.contains(e) && e > &90 {
-        //         acc + (e - 96)
-        //     } else if second_bytes.contains(e) {
-        //         acc + (e - 64)
-        //     } else {
-        //         acc
-        //     }
-        // });
 
-        // first_bytes.into_iter().for_each(|b| {
-        //     if second_bytes.contains(b) && b > &90 {
-        //         sum += *b as u32 - 96
-        //     } else if second_bytes.contains(b) {
-        //         sum += *b as u32 - 38
-        //     }
-        // })
+        let common = first_bytes.intersection(&second_bytes);
+        let val = **common.last().unwrap() as u32;
 
-        for &val in first_bytes {
-            if second_bytes.contains(&val) && val > 90 {
-                sum += val as u32 - 96
-            } else if second_bytes.contains(&val) {
-                sum += val as u32 - 38
-            }
-        }
+        sum += if val > 90 { val - 96 } else { val - 38 }
+        //
+        // for &val in first_bytes {
+        //     if second_bytes.contains(&val) && val > 90 {
+        //         sum += val as u32 - 96
+        //     } else if second_bytes.contains(&val) {
+        //         sum += val as u32 - 38
+        //     }
+        // }
     }
-    Some(sum.into())
+    Some(sum)
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
